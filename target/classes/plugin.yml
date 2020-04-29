@@ -1,0 +1,11 @@
+name: InventoryManager
+main: cloud.akiba.InvManager
+version: 1
+authors:
+  - DripNyan
+commands:
+  inventories:
+    usage: "/inv <list, set, delete>"
+    aliases: [inv]
+    permission: admin.inventories
+    permission-message: "You do not have the required permissions to perform this command!"
