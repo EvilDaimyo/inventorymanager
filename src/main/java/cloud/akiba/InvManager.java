@@ -2,9 +2,6 @@ package cloud.akiba;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -15,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class InvManager extends JavaPlugin implements CommandExecutor {
+public class InvManager extends JavaPlugin {
     @Override
     public void onEnable() {
         config = getConfig();
@@ -23,60 +20,12 @@ public class InvManager extends JavaPlugin implements CommandExecutor {
         init();
         plugin = this;
 
-        Bukkit.getPluginCommand("inventories").setExecutor(this);
+        Bukkit.getPluginCommand("inventories").setExecutor(new Command());
     }
 
     @Override
     public void onDisable() {
         saveConfig();
-    }
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length < 1) return false;
-        Player player = (Player) sender;
-
-        switch (args[0].toLowerCase()) {
-            case "c":
-            case "s":
-            case "create":
-            case "set":
-            case "save": {
-                if (args.length < 2) return false;
-                save(args[1], player);
-                sender.sendMessage("§aAdded!");
-                break;
-            }
-            case "l":
-            case "list": {
-                List<String> data = new ArrayList<>();
-                for (Inventory inventory : list) {
-                    data.add(inventory.getName());
-                }
-                sender.sendMessage("§8(Inv) §7" + data);
-                break;
-            }
-            case "r":
-            case "d":
-            case "del":
-            case "remove":
-            case "delete": {
-                if (args.length < 2) return false;
-                delete(args[1]);
-                sender.sendMessage("§aDeleted!");
-                break;
-            }
-            case "load": {
-                if (args.length < 2) return false;
-                load(player, args[1]);
-                sender.sendMessage("§aLoaded!");
-                break;
-            }
-            default: {
-                return false;
-            }
-        }
-        return true;
     }
 
     public static Plugin getPlugin() {

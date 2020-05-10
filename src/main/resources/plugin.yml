@@ -5,7 +5,7 @@ authors:
   - DripNyan
 commands:
   inventories:
-    usage: "/inv <list, set, delete>"
+    usage: "/inv <list, save, load, delete>"
     aliases: [inv]
     permission: admin.inventories
     permission-message: "You do not have the required permissions to perform this command!"
